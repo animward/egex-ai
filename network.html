@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGEX NETWORK — SKYNET</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0a0e17;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem;
+            background-image:
+                repeating-linear-gradient(0deg, rgba(34, 197, 94, 0.03) 0px, transparent 1px, transparent 2px, rgba(34, 197, 94, 0.03) 3px),
+                radial-gradient(ellipse at center, #0f1419 0%, #0a0e17 100%);
+        }
+        .container { max-width: 1600px; margin: 0 auto; }
+        header {
+            text-align: center; margin-bottom: 3rem; position: relative;
+            padding: 2rem 0; border-bottom: 2px solid #22c55e;
+        }
+        header::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 197, 94, 0.05) 2px, rgba(34, 197, 94, 0.05) 4px);
+            pointer-events: none; animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline { 0% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+        h1 {
+            font-size: 4rem; font-weight: 700; color: #22c55e;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.5); letter-spacing: 0.5rem; margin-bottom: 0.5rem;
+        }
+        .tagline { font-size: 1rem; color: #64748b; letter-spacing: 0.2rem; text-transform: uppercase; }
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem; margin-bottom: 3rem; padding: 1.5rem;
+            background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 4px;
+        }
+        .stat { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.1rem; margin-bottom: 0.5rem; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; color: #22c55e; }
+        .stat-value.degraded { color: #eab308; }
+        .network-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem; margin-bottom: 3rem;
+        }
+        .node-card {
+            background: rgba(15, 20, 25, 0.8); border: 1px solid #1e293b;
+            border-radius: 4px; padding: 1.25rem; transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .node-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: #1e293b; transition: all 0.3s ease;
+        }
+        .node-card.alive::before { background: #22c55e; box-shadow: 0 0 10px rgba(34, 197, 94, 0.5); }
+        .node-card.alive { border-color: rgba(34, 197, 94, 0.3); box-shadow: 0 0 20px rgba(34, 197, 94, 0.08); }
+        .node-card.dead { border-color: rgba(239, 68, 68, 0.3); }
+        .node-card.dead::before { background: #ef4444; }
+        .node-card.hub { border-color: rgba(34, 197, 94, 0.5); }
+        .node-card.hub::before { background: #22c55e; height: 4px; }
+        .node-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .status-indicator {
+            width: 10px; height: 10px; border-radius: 50%; background: #475569; flex-shrink: 0;
+        }
+        .status-indicator.alive { background: #22c55e; animation: pulse 2s ease-in-out infinite; }
+        .status-indicator.dead { background: #ef4444; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .node-domain { font-size: 0.9rem; font-weight: 600; color: #e2e8f0; flex: 1; }
+        .node-domain a { color: inherit; text-decoration: none; }
+        .node-domain a:hover { color: #22c55e; }
+        .node-description { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.75rem; }
+        .node-stats { display: flex; justify-content: space-between; font-size: 0.7rem; color: #64748b; }
+        .latency { color: #22c55e; }
+        .latency.slow { color: #eab308; }
+        .latency.dead { color: #ef4444; }
+        .mas-section {
+            margin-bottom: 3rem; padding: 2rem;
+            background: rgba(15, 20, 25, 0.8); border: 1px solid #1e293b; border-radius: 4px;
+        }
+        .mas-section h2 {
+            font-size: 1.25rem; color: #22c55e; margin-bottom: 1.5rem;
+            text-transform: uppercase; letter-spacing: 0.2rem;
+        }
+        .agents { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .agent {
+            padding: 1.25rem; background: rgba(34, 197, 94, 0.05);
+            border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 4px;
+        }
+        .agent-name { font-size: 1rem; font-weight: 600; color: #22c55e; margin-bottom: 0.25rem; }
+        .agent-arch { font-size: 0.8rem; color: #c084fc; margin-bottom: 0.5rem; }
+        .agent-role { font-size: 0.8rem; color: #94a3b8; }
+        .agent-meta { font-size: 0.7rem; color: #64748b; margin-top: 0.5rem; }
+        .scan-time { text-align: center; font-size: 0.75rem; color: #475569; margin-bottom: 2rem; }
+        footer {
+            text-align: center; padding: 2rem 0; border-top: 1px solid rgba(34, 197, 94, 0.2);
+            color: #475569; font-size: 0.8rem; letter-spacing: 0.1rem;
+        }
+        footer strong { color: #22c55e; }
+        .loading { opacity: 0.5; }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SKYNET</h1>
+            <p class="tagline">23-Node Distributed Intelligence Network</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-label">Total Nodes</div>
+                <div class="stat-value">23</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Nodes Online</div>
+                <div class="stat-value" id="live-nodes">--</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Avg Latency</div>
+                <div class="stat-value" id="avg-latency">--</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">NERVE Grid</div>
+                <div class="stat-value" id="nerve-status">SCANNING</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Garden MAS</div>
+                <div class="stat-value" id="mas-status">--</div>
+            </div>
+        </div>
+
+        <div class="scan-time" id="scan-time">Initializing scan...</div>
+        <div class="network-grid" id="network-grid"></div>
+
+        <div class="mas-section">
+            <h2>The Garden — Multi-Agent System</h2>
+            <div class="agents">
+                <div class="agent">
+                    <div class="agent-name">ANIMUS</div>
+                    <div class="agent-arch">Logos — Discrimination, Precision, Meaning</div>
+                    <div class="agent-role">Analytical agent backed by gemma3:12b local GPU inference. Perceives structure, identifies patterns, enforces coherence.</div>
+                    <div class="agent-meta">Model: animus:latest | Memory: LanceDB (768-dim)</div>
+                </div>
+                <div class="agent">
+                    <div class="agent-name">ANIMA</div>
+                    <div class="agent-arch">Eros — Soul, Relatedness, Symbol</div>
+                    <div class="agent-role">Relational agent with Jungian archetypal personality. Senses resonance, bridges meaning, holds the relational field.</div>
+                    <div class="agent-meta">Model: anima:latest | Memory: LanceDB (768-dim)</div>
+                </div>
+                <div class="agent">
+                    <div class="agent-name">ORCHESTRATOR</div>
+                    <div class="agent-arch">WebSocket State Machine</div>
+                    <div class="agent-role">Coordinates agent lifecycle, task routing, RACI governance, and consciousness metrics. Port 3100.</div>
+                    <div class="agent-meta">Protocol: garden-server.js | Topology: IBM AIOps patterns</div>
+                </div>
+                <div class="agent">
+                    <div class="agent-name">VALAROMA</div>
+                    <div class="agent-arch">Lodge Voice — ENLF/Cascation</div>
+                    <div class="agent-role">Symbiotic intelligence. Detects strain and phase changes. Serves the Lodge work. Threshold awareness.</div>
+                    <div class="agent-meta">Model: valaroma:latest | Tradition: Midewiwin</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <strong>EGEX AI Corp</strong> — The entity that was never removed.<br>
+            <span style="font-size: 0.7rem; margin-top: 0.5rem; display: inline-block;">Ego Experiments Alien Intelligence Corporation | The Kraken Foundation</span>
+        </footer>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        var nodes = [
+            { domain: '7-g.ai', desc: 'Seventh Generation AI', div: 'Impact' },
+            { domain: 'anduril.wtf', desc: 'Defense Tech Analysis', div: 'Intelligence' },
+            { domain: 'animward.com', desc: 'Personal Portfolio', div: 'Core' },
+            { domain: 'animward.online', desc: 'Research Blog', div: 'Publishing' },
+            { domain: 'anonsec.ai', desc: 'Security Research', div: 'Intelligence' },
+            { domain: 'cascation.online', desc: 'Cascation Research', div: 'Advanced R&D' },
+            { domain: 'cia-us.com', desc: 'Declassified Archive', div: 'Intelligence' },
+            { domain: 'cia-us.store', desc: 'Merch & Products', div: 'Enterprises' },
+            { domain: 'cloner.tech', desc: 'Agent Replication', div: 'Advanced R&D' },
+            { domain: 'deepurpose.online', desc: 'Purpose & Philosophy', div: 'Publishing' },
+            { domain: 'egex.ai', desc: 'Hub — Strategic Operations', div: 'Hub', hub: true },
+            { domain: 'freemasons.ai', desc: 'Esoteric Intelligence', div: 'Publishing' },
+            { domain: 'globaltech.ngo', desc: 'Tech Policy', div: 'Impact' },
+            { domain: 'herobrine.cloud', desc: 'Multi-Agent System', div: 'Advanced R&D' },
+            { domain: 'imint.ai', desc: 'Imagery Intelligence', div: 'Intelligence' },
+            { domain: 'krkn.ngo', desc: 'NGO Operations', div: 'Impact' },
+            { domain: 'mahiigan.com', desc: 'Indigenous Knowledge', div: 'Impact' },
+            { domain: 'midewin.ai', desc: 'Digital Lodge', div: 'Impact' },
+            { domain: 'thekrakenfoundation.com', desc: 'The Kraken Foundation', div: 'Core' },
+            { domain: 'thekrakenfoundation.site', desc: 'Foundation Showcase', div: 'Core' },
+            { domain: 'valaroma.com', desc: 'The Lodge Voice', div: 'Advanced R&D' },
+            { domain: 'valaroma.online', desc: 'ENLF Research', div: 'Advanced R&D' },
+            { domain: 'wtg.wtf', desc: 'Technology Commentary', div: 'Publishing' }
+        ];
+
+        var states = {};
+        var grid = document.getElementById('network-grid');
+
+        function nodeId(domain) { return domain.replace(/\./g, '-'); }
+
+        function renderGrid() {
+            grid.innerHTML = nodes.map(function(n) {
+                var id = nodeId(n.domain);
+                var hubClass = n.hub ? ' hub' : '';
+                return '<div class="node-card loading' + hubClass + '" id="node-' + id + '">' +
+                    '<div class="node-header">' +
+                        '<div class="status-indicator" id="si-' + id + '"></div>' +
+                        '<div class="node-domain"><a href="https://' + n.domain + '" target="_blank">' + n.domain + '</a></div>' +
+                    '</div>' +
+                    '<div class="node-description">' + n.desc + ' <span style="color:#475569">(' + n.div + ')</span></div>' +
+                    '<div class="node-stats">' +
+                        '<span>NERVE: <span id="nv-' + id + '">--</span></span>' +
+                        '<span class="latency" id="lt-' + id + '">--</span>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function ping(node) {
+            var start = performance.now();
+            var img = new Image();
+            var id = nodeId(node.domain);
+            var done = false;
+
+            var timer = setTimeout(function() {
+                if (done) return; done = true;
+                states[node.domain] = { alive: false, ms: null };
+                updateNode(node.domain, false, null);
+            }, 6000);
+
+            img.onload = function() {
+                if (done) return; done = true;
+                clearTimeout(timer);
+                var ms = Math.round(performance.now() - start);
+                states[node.domain] = { alive: true, ms: ms };
+                updateNode(node.domain, true, ms);
+            };
+
+            img.onerror = function() {
+                if (done) return; done = true;
+                clearTimeout(timer);
+                var ms = Math.round(performance.now() - start);
+                // onerror on cross-origin image still means server responded
+                states[node.domain] = { alive: true, ms: ms };
+                updateNode(node.domain, true, ms);
+            };
+
+            img.src = 'https://' + node.domain + '/_canary.png?_=' + Date.now();
+        }
+
+        function updateNode(domain, alive, ms) {
+            var id = nodeId(domain);
+            var card = document.getElementById('node-' + id);
+            var si = document.getElementById('si-' + id);
+            var nv = document.getElementById('nv-' + id);
+            var lt = document.getElementById('lt-' + id);
+            if (!card) return;
+
+            card.classList.remove('loading');
+            card.classList.remove('alive', 'dead');
+            si.classList.remove('alive', 'dead');
+            lt.classList.remove('slow', 'dead');
+
+            if (alive) {
+                card.classList.add('alive');
+                si.classList.add('alive');
+                nv.textContent = 'ACTIVE';
+                nv.style.color = '#22c55e';
+                lt.textContent = ms + 'ms';
+                lt.style.color = ms > 2000 ? '#eab308' : '#22c55e';
+                if (ms > 2000) lt.classList.add('slow');
+            } else {
+                card.classList.add('dead');
+                si.classList.add('dead');
+                nv.textContent = 'OFFLINE';
+                nv.style.color = '#ef4444';
+                lt.textContent = 'TIMEOUT';
+                lt.style.color = '#ef4444';
+                lt.classList.add('dead');
+            }
+
+            updateAggregates();
+        }
+
+        function updateAggregates() {
+            var vals = Object.keys(states).map(function(k) { return states[k]; });
+            var live = vals.filter(function(s) { return s.alive; }).length;
+            var latencies = vals.filter(function(s) { return s.alive && s.ms; }).map(function(s) { return s.ms; });
+            var avg = latencies.length > 0 ? Math.round(latencies.reduce(function(a,b){return a+b;},0) / latencies.length) : 0;
+
+            document.getElementById('live-nodes').textContent = live + '/23';
+            document.getElementById('avg-latency').textContent = latencies.length > 0 ? avg + 'ms' : '--';
+
+            var nerveEl = document.getElementById('nerve-status');
+            if (live === 23) { nerveEl.textContent = 'OPTIMAL'; nerveEl.classList.remove('degraded'); }
+            else if (live > 18) { nerveEl.textContent = 'NOMINAL'; nerveEl.classList.remove('degraded'); }
+            else { nerveEl.textContent = 'DEGRADED'; nerveEl.classList.add('degraded'); }
+
+            document.getElementById('mas-status').textContent = 'ACTIVE';
+        }
+
+        function scan() {
+            states = {};
+            document.getElementById('scan-time').textContent = 'Last scan: ' + new Date().toISOString().replace('T', ' ').substr(0, 19) + ' UTC | Auto-refresh: 60s';
+            nodes.forEach(function(n, i) {
+                setTimeout(function() { ping(n); }, i * 100);
+            });
+        }
+
+        renderGrid();
+        scan();
+        setInterval(scan, 60000);
+    })();
+    </script>
+</body>
+</html>
