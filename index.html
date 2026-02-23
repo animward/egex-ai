@@ -580,12 +580,14 @@ body::after {
 }
 
 .cred-nvidia {
-  height: 42px;
-  filter: invert(1);
-  opacity: 0.4;
+  height: 28px; /* must not exceed partner logo height (36px) */
+  opacity: 0.7;
+  /* no color filter — badge colors must not be modified per NVIDIA guidelines */
+  padding: 2px 4px; /* minimum clear space */
+  background: #fff; /* badge has white bg by design — shown as-is */
 }
 
-.cred-nvidia:hover { opacity: 0.75; }
+.cred-nvidia:hover { opacity: 1; }
 
 .legal-note {
   font-family: var(--font-mono);
@@ -1237,7 +1239,7 @@ body::after {
       <div class="cred-divider"></div>
       <img src="images/NON-HUMAN-ONLY-W.png" alt="Non Human Only" class="cred-logo cred-logo-wide">
       <div class="cred-divider"></div>
-      <img src="images/NVIDIA-inception.png" alt="NVIDIA Inception Program" class="cred-logo cred-nvidia">
+      <img src="images/NVIDIA-inception-color.png" alt="NVIDIA Inception Program" class="cred-logo cred-nvidia">
     </div>
     <p class="legal-note">&copy; 2025 NVIDIA, the NVIDIA logo, and NVIDIA Inception are trademarks and/or registered trademarks of NVIDIA Corporation in the U.S. and other countries.</p>
   </div>
