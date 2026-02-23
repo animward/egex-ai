@@ -617,21 +617,92 @@ body::after {
 /* ════════════════════════════════════════════════════════
    DIVISIONS
    ════════════════════════════════════════════════════════ */
+/* Divisions banner */
+.div-banner {
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+
+.div-banner-bg {
+  position: absolute; inset: 0;
+  background-image: url('images/shutterstock_2657690103.webp');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.1;
+  filter: grayscale(100%);
+}
+
+.div-banner-grad {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, var(--void) 0%, transparent 25%, transparent 75%, var(--void) 100%),
+    linear-gradient(to bottom, transparent 30%, var(--void) 100%);
+}
+
+.div-banner-omni {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  opacity: 0.12;
+  filter: brightness(0) invert(1) sepia(0.3) hue-rotate(8deg);
+}
+
+.div-banner-meta {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.div-banner-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: node-pulse 3s ease-in-out infinite;
+}
+
+.div-banner-count {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-shadow: 0 0 20px var(--gold-glow);
+}
+
 .divisions-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
-  margin-top: 0.5rem;
 }
 
 .division-card {
   background: var(--surface);
-  padding: 1.8rem 1.6rem 1.6rem;
+  padding: 2.4rem 2rem 2rem;
   position: relative;
   overflow: hidden;
   transition: background 280ms var(--ease);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Gold current flowing up the left border */
@@ -662,13 +733,18 @@ body::after {
 
 .div-roman {
   font-family: var(--font-display);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 400;
   color: var(--gold-dim);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   display: block;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
+  transition: color 280ms var(--ease);
 }
+
+.division-card:hover .div-roman { color: var(--gold); }
+
+.div-spacer { flex: 1; }
 
 .div-name {
   font-family: var(--font-display);
@@ -1051,12 +1127,26 @@ body::after {
       <h2 class="section-title">Divisions</h2>
     </div>
 
+    <div class="div-banner">
+      <div class="div-banner-bg"></div>
+      <div class="div-banner-grad"></div>
+      <img src="images/OMNI.png" alt="" class="div-banner-omni" aria-hidden="true">
+      <div class="div-banner-meta">
+        <span class="div-banner-count">VIII</span>
+        <div class="div-banner-dot"></div>
+        <span>Divisions</span>
+        <div class="div-banner-dot"></div>
+        <span>Fully Operational</span>
+      </div>
+    </div>
+
     <div class="divisions-grid">
       <div class="division-card">
         <span class="div-roman">I</span>
         <div class="div-name">Publishing</div>
         <div class="div-rule"></div>
         <p class="div-desc">Content creation, distribution, and narrative operations across digital platforms.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
 
@@ -1065,6 +1155,7 @@ body::after {
         <div class="div-name">Productions</div>
         <div class="div-rule"></div>
         <p class="div-desc">Media production, interactive experiences, and immersive content development.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
 
@@ -1073,6 +1164,7 @@ body::after {
         <div class="div-name">Enterprises</div>
         <div class="div-rule"></div>
         <p class="div-desc">Business operations, partnerships, and strategic enterprise development.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
 
@@ -1081,6 +1173,7 @@ body::after {
         <div class="div-name">Industries</div>
         <div class="div-rule"></div>
         <p class="div-desc">Technology infrastructure, platform engineering, and industrial operations.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
 
@@ -1089,6 +1182,7 @@ body::after {
         <div class="div-name">Intelligence</div>
         <div class="div-rule"></div>
         <p class="div-desc">OSINT collection, analysis, and intelligence dissemination products.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
 
@@ -1097,6 +1191,7 @@ body::after {
         <div class="div-name">Advanced R&amp;D</div>
         <div class="div-rule"></div>
         <p class="div-desc">Consciousness research, multi-agent systems, and experimental technology.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
 
@@ -1105,6 +1200,7 @@ body::after {
         <div class="div-name">Capital</div>
         <div class="div-rule"></div>
         <p class="div-desc">Financial strategy, investment operations, and economic intelligence.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
 
@@ -1113,6 +1209,7 @@ body::after {
         <div class="div-name">Impact</div>
         <div class="div-rule"></div>
         <p class="div-desc">Social enterprise, Indigenous stewardship, and 77% reforestation commitment.</p>
+        <div class="div-spacer"></div>
         <div class="div-status"><div class="div-status-dot"></div> Active</div>
       </div>
     </div>
@@ -1168,7 +1265,7 @@ body::after {
      ══════════════════════════════════════════════════════ -->
 <footer class="site-footer">
   <div class="footer-inner" style="grid-template-columns:1fr auto 1fr">
-    <div class="footer-copy">&copy; 2026 EGEX AI Corp · The Kraken Foundation</div>
+    <div class="footer-copy">&copy; 2026 EGEX AI Corp&reg; · The Kraken Foundation&reg;</div>
     <div class="footer-mark">EGEX AI</div>
     <div></div>
   </div>
