@@ -69,7 +69,7 @@ body {
   background: var(--void);
   color: var(--text);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.05rem;
   line-height: 1.75;
   min-height: 100vh;
@@ -154,13 +154,14 @@ body::after {
   user-select: none;
 }
 
-.brand-logo {
-  height: 28px;
-  width: auto;
-  opacity: 0.75;
-  transition: opacity 0.3s var(--ease);
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-shadow: 0 0 16px var(--gold-glow);
 }
-.brand-logo:hover { opacity: 1; }
 
 .brand-rule {
   width: 40px;
@@ -410,8 +411,8 @@ body::after {
 
 .hero-subtitle {
   font-family: var(--font-body);
-  font-style: italic;
-  font-weight: 300;
+
+  font-weight: 400;
   font-size: clamp(1rem, 2.8vw, 1.5rem);
   color: var(--text-muted);
   letter-spacing: 0.04em;
@@ -918,7 +919,7 @@ body::after {
 .contact-value:hover { color: var(--gold); }
 
 .contact-note {
-  font-style: italic;
+
   font-size: 0.88rem;
   color: var(--text-muted);
   margin-top: 0.8rem;
@@ -1048,7 +1049,7 @@ body::after {
   </div>
 
   <div class="header-brand" id="homeLink">
-    <img src="images/EGEX-AI-CORP-W.png" alt="EGEX AI" class="brand-logo">
+    <span class="brand-name">EGEX AI</span>
     <div class="brand-rule"></div>
     <span class="brand-sub">Strategic Operations Platform</span>
   </div>
