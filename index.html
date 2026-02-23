@@ -518,6 +518,85 @@ body::after {
 /* ════════════════════════════════════════════════════════
    ABOUT
    ════════════════════════════════════════════════════════ */
+/* ── About stats row ──────────────────────────────── */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.stat-block {
+  background: var(--surface);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: background 280ms var(--ease);
+}
+
+.stat-block:hover { background: var(--surface-raised); }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 20px var(--gold-glow);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── Credential strip ─────────────────────────────── */
+.cred-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding: 2.5rem 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 2.5rem;
+}
+
+.cred-logo {
+  height: 36px;
+  width: auto;
+  opacity: 0.45;
+  transition: opacity 350ms var(--ease);
+  object-fit: contain;
+}
+
+.cred-logo:hover { opacity: 0.8; }
+
+.cred-logo-wide {
+  height: 28px;
+}
+
+.cred-nvidia {
+  height: 42px;
+  filter: invert(1);
+  opacity: 0.4;
+}
+
+.cred-nvidia:hover { opacity: 0.75; }
+
+.cred-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-strong);
+  flex-shrink: 0;
+}
+
+/* ── About grid ───────────────────────────────────── */
 .about-grid {
   display: grid;
   grid-template-columns: 200px 1fr;
@@ -1084,6 +1163,27 @@ body::after {
       <h2 class="section-title">About</h2>
     </div>
 
+    <!-- Stats row -->
+    <div class="about-stats">
+      <div class="stat-block">
+        <div class="stat-num">VIII</div>
+        <div class="stat-label">Divisions</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">V</div>
+        <div class="stat-label">Frameworks</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">23</div>
+        <div class="stat-label">Domains</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Clouds</div>
+      </div>
+    </div>
+
+    <!-- Main content -->
     <div class="about-grid">
       <div class="about-left">
         <img src="images/PNG-CERBERUS-W.png" alt="CERBERUS" class="cerberus-seal">
@@ -1104,7 +1204,7 @@ body::after {
         <p class="about-body">
           Consciousness research meets strategic operations. <strong>Multi-agent systems.</strong> Multi-cloud infrastructure. Multi-jurisdictional reach. The platform is built for what comes next — not what came before.
         </p>
-        <p class="about-body" style="font-style:italic; color:var(--text-muted);">
+        <p class="about-body" style="color:var(--text-muted);">
           Full name: Ego Experiments Alien Intelligence Corporation. The name is accurate.
         </p>
         <div class="tag-row">
@@ -1118,6 +1218,17 @@ body::after {
           <span class="tag">EGEX Network</span>
         </div>
       </div>
+    </div>
+
+    <!-- Credential strip -->
+    <div class="cred-strip">
+      <img src="images/PNG-CERBERUS-W.png" alt="CERBERUS" class="cred-logo">
+      <div class="cred-divider"></div>
+      <img src="images/BEYOND-HUMAN-W.png" alt="Beyond Human" class="cred-logo cred-logo-wide">
+      <div class="cred-divider"></div>
+      <img src="images/NON-HUMAN-ONLY-W.png" alt="Non Human Only" class="cred-logo cred-logo-wide">
+      <div class="cred-divider"></div>
+      <img src="images/NVIDIA-inception.png" alt="NVIDIA Inception Program" class="cred-logo cred-nvidia">
     </div>
   </div>
 </div>
