@@ -33,11 +33,11 @@
   --surface-raised:  #0d1220;
   --surface-glass:   rgba(7, 11, 23, 0.9);
 
-  --gold:            #c8a96e;
-  --gold-dim:        #7a6840;
-  --gold-bright:     #e8ca90;
-  --gold-glow:       rgba(200, 169, 110, 0.25);
-  --gold-glow-strong:rgba(200, 169, 110, 0.5);
+  --gold:            #76b900;
+  --gold-dim:        #4a7300;
+  --gold-bright:     #96e600;
+  --gold-glow:       rgba(118, 185, 0, 0.25);
+  --gold-glow-strong:rgba(118, 185, 0, 0.5);
 
   --crimson:         #6b1414;
   --crimson-bright:  #b03030;
@@ -46,8 +46,8 @@
   --text-muted:      rgba(255,255,255,0.55);
   --text-dim:        rgba(255,255,255,0.25);
 
-  --border:          rgba(200, 169, 110, 0.1);
-  --border-strong:   rgba(200, 169, 110, 0.28);
+  --border:          rgba(118, 185, 0, 0.1);
+  --border-strong:   rgba(118, 185, 0, 0.28);
 
   --font-display:    'DejaVu Sans Mono', 'Courier New', monospace;
   --font-mono:       'DejaVu Sans Mono', 'Courier New', monospace;
@@ -261,7 +261,7 @@ body::after {
   justify-content: center;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 70% 70% at 50% 50%, rgba(200,169,110,0.04) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 70% at 50% 50%, rgba(118,185,0,0.04) 0%, transparent 65%),
     radial-gradient(ellipse 50% 50% at 15% 85%, rgba(107,20,20,0.08) 0%, transparent 55%),
     var(--void);
 }
@@ -366,8 +366,8 @@ body::after {
 }
 
 @keyframes logo-glow {
-  0%,100% { filter: drop-shadow(0 0 12px rgba(200,169,110,0.06)); }
-  50%      { filter: drop-shadow(0 0 30px rgba(200,169,110,0.18)); }
+  0%,100% { filter: drop-shadow(0 0 12px rgba(118,185,0,0.06)); }
+  50%      { filter: drop-shadow(0 0 30px rgba(118,185,0,0.18)); }
 }
 
 .hero-eyebrow {
@@ -390,8 +390,8 @@ body::after {
   line-height: 1;
   text-shadow:
     0 0 40px var(--gold-glow),
-    0 0 80px rgba(200,169,110,0.12),
-    0 0 160px rgba(200,169,110,0.05);
+    0 0 80px rgba(118,185,0,0.12),
+    0 0 160px rgba(118,185,0,0.05);
   margin-bottom: 0;
   min-width: 4ch;
   display: inline-block;
@@ -809,7 +809,7 @@ body::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 0% 100%, rgba(200,169,110,0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse 80% 60% at 0% 100%, rgba(118,185,0,0.05) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 350ms var(--ease);
 }
@@ -1099,45 +1099,45 @@ body::after {
     <div class="hero-sigil" aria-hidden="true">
       <!-- Outer octagram -->
       <svg class="sigil-outer" viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="0" cy="0" r="278" fill="none" stroke="#c8a96e" stroke-width="0.5" opacity="0.35"/>
-        <circle cx="0" cy="0" r="195" fill="none" stroke="#c8a96e" stroke-width="0.4" opacity="0.2"/>
-        <rect x="-168" y="-168" width="336" height="336" fill="none" stroke="#c8a96e" stroke-width="0.7" opacity="0.18" rx="0"/>
-        <rect x="-168" y="-168" width="336" height="336" fill="none" stroke="#c8a96e" stroke-width="0.7" opacity="0.18" transform="rotate(45)"/>
+        <circle cx="0" cy="0" r="278" fill="none" stroke="#76b900" stroke-width="0.5" opacity="0.35"/>
+        <circle cx="0" cy="0" r="195" fill="none" stroke="#76b900" stroke-width="0.4" opacity="0.2"/>
+        <rect x="-168" y="-168" width="336" height="336" fill="none" stroke="#76b900" stroke-width="0.7" opacity="0.18" rx="0"/>
+        <rect x="-168" y="-168" width="336" height="336" fill="none" stroke="#76b900" stroke-width="0.7" opacity="0.18" transform="rotate(45)"/>
         <!-- 8 spokes -->
-        <line x1="0" y1="-278" x2="0" y2="278" stroke="#c8a96e" stroke-width="0.3" opacity="0.12"/>
-        <line x1="-278" y1="0" x2="278" y2="0" stroke="#c8a96e" stroke-width="0.3" opacity="0.12"/>
-        <line x1="-196.57" y1="-196.57" x2="196.57" y2="196.57" stroke="#c8a96e" stroke-width="0.3" opacity="0.12"/>
-        <line x1="196.57" y1="-196.57" x2="-196.57" y2="196.57" stroke="#c8a96e" stroke-width="0.3" opacity="0.12"/>
+        <line x1="0" y1="-278" x2="0" y2="278" stroke="#76b900" stroke-width="0.3" opacity="0.12"/>
+        <line x1="-278" y1="0" x2="278" y2="0" stroke="#76b900" stroke-width="0.3" opacity="0.12"/>
+        <line x1="-196.57" y1="-196.57" x2="196.57" y2="196.57" stroke="#76b900" stroke-width="0.3" opacity="0.12"/>
+        <line x1="196.57" y1="-196.57" x2="-196.57" y2="196.57" stroke="#76b900" stroke-width="0.3" opacity="0.12"/>
         <!-- 8 outer nodes -->
-        <circle cx="0"       cy="-278" r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
-        <circle cx="196.57"  cy="-196.57" r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
-        <circle cx="278"     cy="0"     r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
-        <circle cx="196.57"  cy="196.57" r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
-        <circle cx="0"       cy="278"   r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
-        <circle cx="-196.57" cy="196.57" r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
-        <circle cx="-278"    cy="0"     r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
-        <circle cx="-196.57" cy="-196.57" r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.5"/>
+        <circle cx="0"       cy="-278" r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
+        <circle cx="196.57"  cy="-196.57" r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
+        <circle cx="278"     cy="0"     r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
+        <circle cx="196.57"  cy="196.57" r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
+        <circle cx="0"       cy="278"   r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
+        <circle cx="-196.57" cy="196.57" r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
+        <circle cx="-278"    cy="0"     r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
+        <circle cx="-196.57" cy="-196.57" r="5" fill="none" stroke="#76b900" stroke-width="1" opacity="0.5"/>
         <!-- Tick extensions from outer ring -->
-        <line x1="0" y1="-278" x2="0" y2="-292" stroke="#c8a96e" stroke-width="1" opacity="0.4"/>
-        <line x1="278" y1="0" x2="292" y2="0" stroke="#c8a96e" stroke-width="1" opacity="0.4"/>
-        <line x1="0" y1="278" x2="0" y2="292" stroke="#c8a96e" stroke-width="1" opacity="0.4"/>
-        <line x1="-278" y1="0" x2="-292" y2="0" stroke="#c8a96e" stroke-width="1" opacity="0.4"/>
+        <line x1="0" y1="-278" x2="0" y2="-292" stroke="#76b900" stroke-width="1" opacity="0.4"/>
+        <line x1="278" y1="0" x2="292" y2="0" stroke="#76b900" stroke-width="1" opacity="0.4"/>
+        <line x1="0" y1="278" x2="0" y2="292" stroke="#76b900" stroke-width="1" opacity="0.4"/>
+        <line x1="-278" y1="0" x2="-292" y2="0" stroke="#76b900" stroke-width="1" opacity="0.4"/>
       </svg>
 
       <!-- Inner counter-rotating: Solomon's seal triangles + dashed rings -->
       <svg class="sigil-inner" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="0" cy="0" r="155" fill="none" stroke="#c8a96e" stroke-width="0.5" stroke-dasharray="3 9" opacity="0.28"/>
-        <circle cx="0" cy="0" r="88"  fill="none" stroke="#c8a96e" stroke-width="0.5" stroke-dasharray="2 7" opacity="0.22"/>
-        <polygon points="0,-128 110.85,64 -110.85,64" fill="none" stroke="#c8a96e" stroke-width="0.7" opacity="0.22"/>
-        <polygon points="0,128 110.85,-64 -110.85,-64" fill="none" stroke="#c8a96e" stroke-width="0.7" opacity="0.22"/>
+        <circle cx="0" cy="0" r="155" fill="none" stroke="#76b900" stroke-width="0.5" stroke-dasharray="3 9" opacity="0.28"/>
+        <circle cx="0" cy="0" r="88"  fill="none" stroke="#76b900" stroke-width="0.5" stroke-dasharray="2 7" opacity="0.22"/>
+        <polygon points="0,-128 110.85,64 -110.85,64" fill="none" stroke="#76b900" stroke-width="0.7" opacity="0.22"/>
+        <polygon points="0,128 110.85,-64 -110.85,-64" fill="none" stroke="#76b900" stroke-width="0.7" opacity="0.22"/>
       </svg>
 
       <!-- Innermost pulsing: small circle + cross -->
       <svg class="sigil-pulse" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="0" cy="0" r="60" fill="none" stroke="#c8a96e" stroke-width="0.6" opacity="0.3"/>
-        <circle cx="0" cy="0" r="6"  fill="#c8a96e" opacity="0.45"/>
-        <line x1="-60" y1="0" x2="60" y2="0" stroke="#c8a96e" stroke-width="0.5" opacity="0.2"/>
-        <line x1="0" y1="-60" x2="0" y2="60" stroke="#c8a96e" stroke-width="0.5" opacity="0.2"/>
+        <circle cx="0" cy="0" r="60" fill="none" stroke="#76b900" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="0" cy="0" r="6"  fill="#76b900" opacity="0.45"/>
+        <line x1="-60" y1="0" x2="60" y2="0" stroke="#76b900" stroke-width="0.5" opacity="0.2"/>
+        <line x1="0" y1="-60" x2="0" y2="60" stroke="#76b900" stroke-width="0.5" opacity="0.2"/>
       </svg>
     </div>
 
