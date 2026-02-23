@@ -1212,30 +1212,50 @@ body::after {
     cycleEl.textContent = String(cycle).padStart(6, '0');
   }, 5000);
 
-  /* ── Character scramble on hero title ───────────────── */
-  var titleEl = document.getElementById('heroTitle');
-  var FINAL   = 'EGEX AI';
-  var CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789▓▒░█';
-  var frame   = 0;
-  var FRAMES  = FINAL.length * 7;
+  /* ── Scramble engine ────────────────────────────────── */
+  var SC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789▓▒░█·//°';
 
-  function scramble() {
-    titleEl.textContent = FINAL.split('').map(function (ch, i) {
-      if (ch === ' ') return ' ';
-      if (i < Math.floor(frame / 7)) return ch;
-      if (frame < i * 2) return ' ';
-      return CHARS[Math.floor(Math.random() * CHARS.length)];
-    }).join('');
-    frame++;
-    if (frame <= FRAMES + 4) {
-      setTimeout(scramble, 28);
-    } else {
-      titleEl.textContent = FINAL;
+  function scrambleEl(el, delay, speed, stride) {
+    stride = stride || 7;
+    speed  = speed  || 30;
+    var finalHtml = el.innerHTML;
+    var text      = el.textContent;
+    var nonSpace  = text.replace(/\s/g, '').length;
+    var FRAMES    = nonSpace * stride;
+    var frame     = 0;
+
+    function tick() {
+      var pos = 0;
+      el.textContent = text.split('').map(function (ch) {
+        if (/\s/.test(ch)) return ch;
+        pos++;
+        var revealAt = (pos / nonSpace) * FRAMES * 0.75;
+        if (frame >= revealAt + stride) return ch;
+        if (frame < revealAt - stride) return '\u00a0';
+        return SC[Math.floor(Math.random() * SC.length)];
+      }).join('');
+      frame++;
+      if (frame <= FRAMES + 4) setTimeout(tick, speed);
+      else el.innerHTML = finalHtml;
     }
+
+    setTimeout(tick, delay);
   }
 
-  // Start scramble after short delay (let eyebrow appear first)
-  setTimeout(scramble, 650);
+  /* Cascade: coords → eyebrow → title */
+  /* Coords fire immediately on load */
+  var coords = document.querySelectorAll('.coord');
+  coords.forEach(function (c, i) {
+    /* skip the CYCLE counter (has live span inside) */
+    if (c.querySelector('span')) return;
+    scrambleEl(c, i * 120, 22, 5);
+  });
+
+  /* Eyebrow — starts scrambling as it fades in */
+  scrambleEl(document.querySelector('.hero-eyebrow'), 350, 18, 4);
+
+  /* Main title — after eyebrow is mostly resolved */
+  scrambleEl(document.getElementById('heroTitle'), 700, 28, 7);
 
   /* ── Intersection observer for section fades ────────── */
   if ('IntersectionObserver' in window) {
