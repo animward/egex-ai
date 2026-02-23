@@ -22,6 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/dejavu-sans-mono" rel="stylesheet">
 
 <style>
 /* ═══════════════════════════════════════════════════════════════
@@ -340,6 +341,37 @@ body::after {
   z-index: 10;
   text-align: center;
   padding: 4rem 2rem;
+}
+
+.hero-logo-img {
+  width: clamp(240px, 50vw, 500px);
+  height: auto;
+  filter: brightness(0) invert(1) sepia(0.3) hue-rotate(8deg);
+  animation: logo-decode 1.3s cubic-bezier(0.4,0,0.2,1) forwards 0.2s, logo-glow 8s ease-in-out infinite 2s;
+  opacity: 0;
+  display: block;
+  margin: 0 auto;
+}
+
+@keyframes logo-decode {
+  0%   { opacity: 1; clip-path: inset(100% 0 0 0); transform: translateX(0); }
+  12%  { clip-path: inset(72% 0 0 0); transform: translateX(-8px); }
+  24%  { clip-path: inset(50% 0 0 0); transform: translateX(5px); }
+  36%  { clip-path: inset(28% 0 0 0); transform: translateX(-3px); }
+  48%  { clip-path: inset(10% 0 0 0); transform: translateX(2px); }
+  55%  { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  60%  { clip-path: inset(22% 0 65% 0); transform: translateX(10px); }
+  63%  { clip-path: inset(0 0 0 0); transform: translateX(-5px); }
+  67%  { clip-path: inset(52% 0 34% 0); transform: translateX(7px); }
+  71%  { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  78%  { clip-path: inset(70% 0 18% 0); transform: translateX(-4px); }
+  83%  { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  100% { clip-path: inset(0 0 0 0); transform: translateX(0); opacity: 1; }
+}
+
+@keyframes logo-glow {
+  0%,100% { filter: brightness(0) invert(1) sepia(0.3) hue-rotate(8deg) drop-shadow(0 0 16px rgba(200,169,110,0.08)); }
+  50%      { filter: brightness(0) invert(1) sepia(0.4) hue-rotate(8deg) drop-shadow(0 0 36px rgba(200,169,110,0.22)); }
 }
 
 .hero-eyebrow {
@@ -955,7 +987,7 @@ body::after {
     <!-- Hero text -->
     <div class="hero-content">
       <p class="hero-eyebrow">Ego Experiments Alien Intelligence Corporation</p>
-      <h1 class="hero-title" id="heroTitle">EGEX AI</h1>
+      <h1><img src="images/EGEX-AI-CORP-W.png" alt="EGEX AI Corp" class="hero-logo-img"></h1>
       <div class="hero-divider"></div>
       <p class="hero-subtitle">Better Experienced Than Explained.</p>
       <a href="#divisions" class="hero-cta" id="heroCtaBtn">
@@ -1135,18 +1167,10 @@ body::after {
      FOOTER
      ══════════════════════════════════════════════════════ -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-copy">
-      &copy; 2026 EGEX AI Corp<br>
-      The Kraken Foundation
-    </div>
+  <div class="footer-inner" style="grid-template-columns:1fr auto 1fr">
+    <div class="footer-copy">&copy; 2026 EGEX AI Corp · The Kraken Foundation</div>
     <div class="footer-mark">EGEX AI</div>
-    <div class="footer-network">
-      <a href="https://egoexperiments.com" target="_blank" rel="noopener">egoexperiments.com</a>
-      <a href="https://thekrakenfoundation.com" target="_blank" rel="noopener">thekrakenfoundation.com</a>
-      <a href="https://animward.com" target="_blank" rel="noopener">animward.com</a>
-      <a href="https://cia-us.com" target="_blank" rel="noopener">cia-us.com</a>
-    </div>
+    <div></div>
   </div>
 </footer>
 
@@ -1215,7 +1239,7 @@ body::after {
   /* ── Scramble engine ────────────────────────────────── */
   var SC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789▓▒░█·//°';
 
-  function scrambleEl(el, delay, speed, stride) {
+  function scrambleEl(el, delay, speed, stride, onDone) {
     stride = stride || 7;
     speed  = speed  || 30;
     var finalHtml = el.innerHTML;
@@ -1236,26 +1260,24 @@ body::after {
       }).join('');
       frame++;
       if (frame <= FRAMES + 4) setTimeout(tick, speed);
-      else el.innerHTML = finalHtml;
+      else { el.innerHTML = finalHtml; if (onDone) onDone(); }
     }
 
     setTimeout(tick, delay);
   }
 
-  /* Cascade: coords → eyebrow → title */
-  /* Coords fire immediately on load */
+  /* Cascade: all coords (including cycle) → eyebrow */
   var coords = document.querySelectorAll('.coord');
   coords.forEach(function (c, i) {
-    /* skip the CYCLE counter (has live span inside) */
-    if (c.querySelector('span')) return;
-    scrambleEl(c, i * 120, 22, 5);
+    var isCycle = !!c.querySelector('span');
+    scrambleEl(c, i * 120, 22, 5, isCycle ? function () {
+      /* Re-bind cycle counter to the restored span */
+      cycleEl = document.getElementById('heroCycle');
+    } : null);
   });
 
-  /* Eyebrow — starts scrambling as it fades in */
+  /* Eyebrow — scrambles as it fades in */
   scrambleEl(document.querySelector('.hero-eyebrow'), 350, 18, 4);
-
-  /* Main title — after eyebrow is mostly resolved */
-  scrambleEl(document.getElementById('heroTitle'), 700, 28, 7);
 
   /* ── Intersection observer for section fades ────────── */
   if ('IntersectionObserver' in window) {
