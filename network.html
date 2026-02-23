@@ -16,33 +16,33 @@
             min-height: 100vh;
             padding: 2rem;
             background-image:
-                repeating-linear-gradient(0deg, rgba(34, 197, 94, 0.03) 0px, transparent 1px, transparent 2px, rgba(34, 197, 94, 0.03) 3px),
+                repeating-linear-gradient(0deg, rgba(118, 185, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(118, 185, 0, 0.03) 3px),
                 radial-gradient(ellipse at center, #0f1419 0%, #0a0e17 100%);
         }
         .container { max-width: 1600px; margin: 0 auto; }
         header {
             text-align: center; margin-bottom: 3rem; position: relative;
-            padding: 2rem 0; border-bottom: 2px solid #22c55e;
+            padding: 2rem 0; border-bottom: 2px solid #76b900;
         }
         header::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100%;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(34, 197, 94, 0.05) 2px, rgba(34, 197, 94, 0.05) 4px);
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(118, 185, 0, 0.05) 2px, rgba(118, 185, 0, 0.05) 4px);
             pointer-events: none; animation: scanline 8s linear infinite;
         }
         @keyframes scanline { 0% { transform: translateY(0); } 100% { transform: translateY(100%); } }
         h1 {
-            font-size: 4rem; font-weight: 700; color: #22c55e;
-            text-shadow: 0 0 20px rgba(34, 197, 94, 0.5); letter-spacing: 0.5rem; margin-bottom: 0.5rem;
+            font-size: 4rem; font-weight: 700; color: #76b900;
+            text-shadow: 0 0 20px rgba(118, 185, 0, 0.5); letter-spacing: 0.5rem; margin-bottom: 0.5rem;
         }
         .tagline { font-size: 1rem; color: #64748b; letter-spacing: 0.2rem; text-transform: uppercase; }
         .stats-bar {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem; margin-bottom: 3rem; padding: 1.5rem;
-            background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 4px;
+            background: rgba(118, 185, 0, 0.05); border: 1px solid rgba(118, 185, 0, 0.2); border-radius: 4px;
         }
         .stat { text-align: center; }
         .stat-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.1rem; margin-bottom: 0.5rem; }
-        .stat-value { font-size: 1.75rem; font-weight: 700; color: #22c55e; }
+        .stat-value { font-size: 1.75rem; font-weight: 700; color: #76b900; }
         .stat-value.degraded { color: #eab308; }
         .network-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -57,25 +57,25 @@
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
             background: #1e293b; transition: all 0.3s ease;
         }
-        .node-card.alive::before { background: #22c55e; box-shadow: 0 0 10px rgba(34, 197, 94, 0.5); }
-        .node-card.alive { border-color: rgba(34, 197, 94, 0.3); box-shadow: 0 0 20px rgba(34, 197, 94, 0.08); }
+        .node-card.alive::before { background: #76b900; box-shadow: 0 0 10px rgba(118, 185, 0, 0.5); }
+        .node-card.alive { border-color: rgba(118, 185, 0, 0.3); box-shadow: 0 0 20px rgba(118, 185, 0, 0.08); }
         .node-card.dead { border-color: rgba(239, 68, 68, 0.3); }
         .node-card.dead::before { background: #ef4444; }
-        .node-card.hub { border-color: rgba(34, 197, 94, 0.5); }
-        .node-card.hub::before { background: #22c55e; height: 4px; }
+        .node-card.hub { border-color: rgba(118, 185, 0, 0.5); }
+        .node-card.hub::before { background: #76b900; height: 4px; }
         .node-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
         .status-indicator {
             width: 10px; height: 10px; border-radius: 50%; background: #475569; flex-shrink: 0;
         }
-        .status-indicator.alive { background: #22c55e; animation: pulse 2s ease-in-out infinite; }
+        .status-indicator.alive { background: #76b900; animation: pulse 2s ease-in-out infinite; }
         .status-indicator.dead { background: #ef4444; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
         .node-domain { font-size: 0.9rem; font-weight: 600; color: #e2e8f0; flex: 1; }
         .node-domain a { color: inherit; text-decoration: none; }
-        .node-domain a:hover { color: #22c55e; }
+        .node-domain a:hover { color: #76b900; }
         .node-description { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.75rem; }
         .node-stats { display: flex; justify-content: space-between; font-size: 0.7rem; color: #64748b; }
-        .latency { color: #22c55e; }
+        .latency { color: #76b900; }
         .latency.slow { color: #eab308; }
         .latency.dead { color: #ef4444; }
         .mas-section {
@@ -83,24 +83,24 @@
             background: rgba(15, 20, 25, 0.8); border: 1px solid #1e293b; border-radius: 4px;
         }
         .mas-section h2 {
-            font-size: 1.25rem; color: #22c55e; margin-bottom: 1.5rem;
+            font-size: 1.25rem; color: #76b900; margin-bottom: 1.5rem;
             text-transform: uppercase; letter-spacing: 0.2rem;
         }
         .agents { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         .agent {
-            padding: 1.25rem; background: rgba(34, 197, 94, 0.05);
-            border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 4px;
+            padding: 1.25rem; background: rgba(118, 185, 0, 0.05);
+            border: 1px solid rgba(118, 185, 0, 0.2); border-radius: 4px;
         }
-        .agent-name { font-size: 1rem; font-weight: 600; color: #22c55e; margin-bottom: 0.25rem; }
+        .agent-name { font-size: 1rem; font-weight: 600; color: #76b900; margin-bottom: 0.25rem; }
         .agent-arch { font-size: 0.8rem; color: #c084fc; margin-bottom: 0.5rem; }
         .agent-role { font-size: 0.8rem; color: #94a3b8; }
         .agent-meta { font-size: 0.7rem; color: #64748b; margin-top: 0.5rem; }
         .scan-time { text-align: center; font-size: 0.75rem; color: #475569; margin-bottom: 2rem; }
         footer {
-            text-align: center; padding: 2rem 0; border-top: 1px solid rgba(34, 197, 94, 0.2);
+            text-align: center; padding: 2rem 0; border-top: 1px solid rgba(118, 185, 0, 0.2);
             color: #475569; font-size: 0.8rem; letter-spacing: 0.1rem;
         }
-        footer strong { color: #22c55e; }
+        footer strong { color: #76b900; }
         .loading { opacity: 0.5; }
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
@@ -111,7 +111,7 @@
 <body>
     <div class="container">
         <header>
-            <a href="/" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:monospace;font-size:0.7rem;letter-spacing:0.15em;color:rgba(34,197,94,0.5);text-decoration:none;text-transform:uppercase;margin-bottom:1.2rem;transition:color 0.2s" onmouseover="this.style.color='rgba(34,197,94,0.9)'" onmouseout="this.style.color='rgba(34,197,94,0.5)'">← egex.ai</a>
+            <a href="/" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:monospace;font-size:0.7rem;letter-spacing:0.15em;color:rgba(118,185,0,0.5);text-decoration:none;text-transform:uppercase;margin-bottom:1.2rem;transition:color 0.2s" onmouseover="this.style.color='rgba(118,185,0,0.9)'" onmouseout="this.style.color='rgba(118,185,0,0.5)'">← egex.ai</a>
             <h1>SKYNET</h1>
             <p class="tagline">23-Node Distributed Intelligence Network</p>
         </header>
@@ -280,9 +280,9 @@
                 card.classList.add('alive');
                 si.classList.add('alive');
                 nv.textContent = 'ACTIVE';
-                nv.style.color = '#22c55e';
+                nv.style.color = '#76b900';
                 lt.textContent = ms + 'ms';
-                lt.style.color = ms > 2000 ? '#eab308' : '#22c55e';
+                lt.style.color = ms > 2000 ? '#eab308' : '#76b900';
                 if (ms > 2000) lt.classList.add('slow');
             } else {
                 card.classList.add('dead');
