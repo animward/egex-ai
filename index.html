@@ -381,7 +381,7 @@ body::after {
   text-transform: uppercase;
   margin-bottom: 2rem;
   opacity: 0;
-  animation: rise 0.7s var(--ease) forwards 0.4s;
+  animation: rise-dim 0.7s var(--ease) forwards 1.5s;
 }
 
 .hero-title {
@@ -418,7 +418,7 @@ body::after {
   letter-spacing: 0.04em;
   margin-bottom: 3rem;
   opacity: 0;
-  animation: rise 0.7s var(--ease) forwards 1.3s;
+  animation: rise 0.7s var(--ease) forwards 0.4s;
 }
 
 .hero-cta {
@@ -462,6 +462,11 @@ body::after {
 @keyframes rise {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rise-dim {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 0.38; transform: translateY(0); }
 }
 
 /* ════════════════════════════════════════════════════════
@@ -1370,8 +1375,8 @@ body::after {
     } : null);
   });
 
-  /* Eyebrow — scrambles as it fades in */
-  scrambleEl(document.querySelector('.hero-eyebrow'), 350, 18, 4);
+  /* Eyebrow — scrambles as it fades in (matches 1.5s CSS delay) */
+  scrambleEl(document.querySelector('.hero-eyebrow'), 1500, 18, 4);
 
   /* ── Intersection observer for section fades ────────── */
   if ('IntersectionObserver' in window) {
